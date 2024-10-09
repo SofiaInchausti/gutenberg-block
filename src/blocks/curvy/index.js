@@ -13,7 +13,7 @@ import { registerBlockType } from '@wordpress/blocks';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './style.scss';
-
+import icon from "./assets/icon.svg";
 /**
  * Internal dependencies
  */
@@ -36,4 +36,29 @@ registerBlockType( metadata.name, {
 	 * @see ./save.js
 	 */
 	save,
+	icon: <img src={icon} />,
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: ["core/paragraph"],
+				transform: (attributes) => {
+					//console.log({ data });
+					return createBlock("blockylicious/curvy", {}, [
+						createBlock("core/paragraph", attributes),
+					]);
+				},
+			},
+			{
+				type: "block",
+				blocks: ["core/heading"],
+				transform: (attributes) => {
+					//console.log({ data });
+					return createBlock("blockylicious/curvy", {}, [
+						createBlock("core/heading", attributes),
+					]);
+				},
+			},
+		],
+	},
 } );
