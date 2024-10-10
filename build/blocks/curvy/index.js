@@ -559,14 +559,14 @@ __webpack_require__.r(__webpack_exports__);
       blocks: ["core/paragraph"],
       transform: attributes => {
         //console.log({ data });
-        return createBlock("blockylicious/curvy", {}, [createBlock("core/paragraph", attributes)]);
+        return createBlock("curvy/curvy", {}, [createBlock("core/paragraph", attributes)]);
       }
     }, {
       type: "block",
       blocks: ["core/heading"],
       transform: attributes => {
         //console.log({ data });
-        return createBlock("blockylicious/curvy", {}, [createBlock("core/heading", attributes)]);
+        return createBlock("curvy/curvy", {}, [createBlock("core/heading", attributes)]);
       }
     }]
   }
