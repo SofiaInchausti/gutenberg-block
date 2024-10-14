@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name:       Curvy
  * Description:       Example block scaffolded with Create Block tool.
@@ -21,9 +22,9 @@
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 
- namespace WebDevEducation;
+namespace WebDevEducation;
 
- if (!defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
 	die('Silence is golden.');
 }
 
@@ -75,6 +76,24 @@ final class curvy
 			$style_url = plugins_url("build/style-index.css", __FILE__);
 			wp_enqueue_style('curvy-style', $style_url, array());
 		});
+	}
+
+	static function convert_custom_properties($value)
+	{
+		$prefix     = 'var:';
+		$prefix_len = strlen($prefix);
+		$token_in   = '|';
+		$token_out  = '--';
+		if (str_starts_with($value, $prefix)) {
+			$unwrapped_name = str_replace(
+				$token_in,
+				$token_out,
+				substr($value, $prefix_len)
+			);
+			$value          = "var(--wp--$unwrapped_name)";
+		}
+
+		return $value;
 	}
 }
 
