@@ -49,6 +49,31 @@ final class curvy
 			register_block_type(__DIR__ . '/build/blocks/clickyButton');
 			register_block_type(__DIR__ . '/build/blocks/piccyGallery');
 			register_block_type(__DIR__ . '/build/blocks/piccyImage');
+
+			register_block_pattern_category('curvy', array(
+				'label' => __('curvy', 'curvy')
+			));
+			register_block_pattern('curvy/call-to-action', array(
+				'categories' => array('call-to-action', 'curvy'),
+				'title' => __('curvy call to action', 'curvy'),
+				'description' => __('A heading, paragraph, and clicky button block', 'curvy'),
+				'content' => '<!-- wp:heading {"textAlign":"center"} -->
+				<h2 class="wp-block-heading has-text-align-center">Lorem ipsum</h2>
+				<!-- /wp:heading -->
+
+				<!-- wp:paragraph {"align":"center"} -->
+				<p class="has-text-align-center">Some paragraph text in here as a sub heading.</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:curvy/clicky-group {"justifyContent":"center"} -->
+				<!-- wp:curvy/clicky-button {"labelText":"Call to action","style":{"color":{"background":"#000000","text":"#FFFFFF"},"spacing":{"padding":{"top":"10px","bottom":"10px","left":"20px","right":"20px"}}}} /-->
+				<!-- /wp:curvy/clicky-group -->'
+			));
+			$script_url = plugins_url('build/index.js', __FILE__);
+			wp_enqueue_script('curvy-index', $script_url, array('wp-blocks', 'wp-element', 'wp-editor'));
+
+			$style_url = plugins_url("build/style-index.css", __FILE__);
+			wp_enqueue_style('curvy-style', $style_url, array());
 		});
 	}
 }
